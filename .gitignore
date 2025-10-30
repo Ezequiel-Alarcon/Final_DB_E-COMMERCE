@@ -1,0 +1,8 @@
+# Dependencias
+/node_modules
+
+# Archivos de entorno
+.env
+
+# Archivos que no son de código
+*.pdf
