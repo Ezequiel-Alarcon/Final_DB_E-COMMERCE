@@ -1,0 +1,263 @@
+{
+  "info": {
+    "name": "Parcial BD2 - E-commerce API",
+    "_postman_id": "bd2-ecommerce-collection",
+    "description": "Colección de pruebas para el parcial",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth - Registro",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/usuarios",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "usuarios"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nombre\": \"Admin\", \"email\": \"admin@demo.com\", \"password\": \"123456\", \"rol\": \"admin\"}"
+        }
+      }
+    },
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/usuarios/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "usuarios",
+            "login"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\": \"admin@demo.com\", \"password\": \"123456\"}"
+        }
+      }
+    },
+    {
+      "name": "Usuarios - Me",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/usuarios/me",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "usuarios",
+            "me"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Categorias - Crear",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/categorias",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "categorias"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nombre\": \"Notebooks\", \"descripcion\": \"Port\\u00e1tiles\"}"
+        }
+      }
+    },
+    {
+      "name": "Productos - Crear",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/productos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "productos"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nombre\": \"Lenovo IdeaPad\", \"precio\": 1000, \"stock\": 5, \"marca\": \"Lenovo\", \"categoria\": \"<reemplazar_por_id_categoria>\"}"
+        }
+      }
+    },
+    {
+      "name": "Productos - Listar",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/productos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "productos"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Carrito - Agregar Item",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/carrito/items",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "carrito",
+            "items"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"productId\": \"<id_producto>\", \"cantidad\": 2}"
+        }
+      }
+    },
+    {
+      "name": "Orden - Crear desde carrito",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/ordenes",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "ordenes"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"metodoPago\": \"efectivo\"}"
+        }
+      }
+    },
+    {
+      "name": "Reseñas - Crear",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/resenas",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "resenas"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"producto\": \"<id_producto>\", \"calificacion\": 5, \"comentario\": \"Excelente\"}"
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
