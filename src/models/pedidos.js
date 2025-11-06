@@ -33,7 +33,6 @@ const itemSchema = mongoose.Schema({
     }
 }, { _id: false });
 
-
 // --- MODELO DE REFERENCIA (Referenced) ---
 // Justificación: 'Pedido' es una entidad independiente y central
 // del e-commerce. Se conecta con 'Usuario' y 'Producto'.
