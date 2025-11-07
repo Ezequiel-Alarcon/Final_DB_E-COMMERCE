@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-// --- MODELO DE REFERENCIA (Referenced) ---
+// --- MODELO DE REFERENCIA ---
 // Se define el esquema 'Categoria' en su propia colección.
 //
 // Justificación:
@@ -10,12 +10,9 @@ import mongoose from "mongoose";
 //    agrupará a muchos productos.
 // 3. Reusabilidad: Al ser una colección separada, el modelo 'Producto'
 //    podrá "referenciar" a 'Categoria' usando su ObjectId.
-const categoriaSchema = mongoose.Schema({
-    nombre: { type: String, required: true, unique: true }, // Añadí 'unique' (buena práctica)
+const CategorySchema = mongoose.Schema({
+    nombre: { type: String, required: true, unique: true },
     descripcion: { type: String, required: true }
-}, {
-    collection: "categorias"
-});
+}, { timestamps: true });
 
-// Corregido: Usamos 'Categoria' (singular) por convención
-export const Categoria = mongoose.model("Categoria", categoriaSchema);
+export default mongoose.model('Category', CategorySchema);

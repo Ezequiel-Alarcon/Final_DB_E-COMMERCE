@@ -8,25 +8,20 @@ import mongoose from "mongoose";
 //    del e-commerce con su propio CRUD.
 // 2. Relación N-a-1 (Muchos-a-Uno): Muchos productos
 //    pertenecerán a UNA categoría.
-const productoSchema = mongoose.Schema({
+const ProductSchema = mongoose.Schema({
     nombre: { type: String, required: true },
     descripcion: { type: String, required: true },
 
-    // --- Referencia a 'Categoria' (Corregido) ---
-    // Justificación: Se usa una referencia (ObjectId) en lugar
-    // de embeber el documento completo de la categoría.
-    //
+    // --- Referencia a 'Categoria' ---
     // Razón: Eficiencia de Almacenamiento. Si embebiéramos
     // el nombre de la categoría (ej: "Laptops"), ese dato
     // se duplicaría en miles de productos. Con la referencia,
-    // solo almacenamos el ID, y usamos $lookup o .populate()
-    // (como pide la consigna) para obtener los detalles.
+    // solo almacenamos el ID, y usamos $lookup o .populate() para obtener los detalles.
     categoria_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Categoria", // El string "Categoria" apunta al modelo Categoria.
+        ref: "Category", // El string "Category" apunta al modelo Categoria.
         required: true
     },
-
     precio: { type: Number, required: true, min: 0.1 },
     stock: { type: Number, required: true, min: 0 },
 
@@ -40,8 +35,6 @@ const productoSchema = mongoose.Schema({
     // evitando $lookups o $groups costosos solo para mostrar la calificación.
     numResenas: { type: Number, default: 0 },
     calificacionPromedio: { type: Number, default: 0 }
-}, {
-    collection: "productos"
-});
+}, { timestamps: true });
 
-export const Producto = mongoose.model("Producto", productoSchema);
+export default mongoose.model('Product', ProductSchema);
