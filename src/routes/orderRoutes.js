@@ -1,0 +1,32 @@
+import express from 'express';
+import { createOrder, getMyOrders, getAllOrders, updateOrderStatus, getOrderStats } from '../controllers/order.controller.js';
+import { validateToken, requireAdmin } from '../services/auth.service.js';
+
+const router = express.Router();
+
+// --- Todas las rutas de pedidos requieren estar logueado ---
+// (Como pide el PDF)
+router.use(validateToken);
+
+// --- Rutas de Cliente ---
+
+// POST /api/orders/  -> Crear un pedido nuevo (usa el carrito)
+router.post('/', createOrder);
+
+// GET /api/orders/myorders  -> Ver mis pedidos
+// (Esta es nuestra versión de 'pedidos de un usuario')
+router.get('/myorders', getMyOrders);
+
+
+// --- Rutas de Admin ---
+
+// GET /api/orders/  -> Ver TODOS los pedidos de TODOS los usuarios
+router.get('/', requireAdmin, getAllOrders);
+
+// GET /api/orders/stats  -> Ver estadísticas de pedidos
+router.get('/stats', requireAdmin, getOrderStats);
+
+// PATCH /api/orders/:id/status  -> Actualizar estado (ej: "enviado")
+router.patch('/:id/status', requireAdmin, updateOrderStatus);
+
+export default router;

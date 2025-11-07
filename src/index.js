@@ -2,20 +2,19 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
-// Importar rutas
-import userRoutes from './routes/user.routes.js';
-// import productRoutes from './routes/product.routes.js'; // Próximamente
-// import categoryRoutes from './routes/category.routes.js'; // Próximamente
-// import orderRoutes from './routes/order.routes.js'; // Próximamente
-// import cartRoutes from './routes/cart.routes.js'; // Próximamente
-// import reviewRoutes from './routes/review.routes.js'; // Próximamente
+import userRoutes from './routes/userRoutes.js';
+import categoryRoutes from './routes/categoryRoutes.js';
+import productRoutes from './routes/productRoutes.js';
+import cartRoutes from './routes/cartRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
+import reviewRoutes from './routes/reviewRoutes.js';
 
-// Configuración
+// --- 2. Configuración inicial ---
 dotenv.config();
 const app = express();
-app.use(express.json()); // Middleware para JSON
+app.use(express.json()); // Middleware para que Express entienda JSON
 
-// Conexión a BD
+// --- 3. Conexión a Base de Datos ---
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost:27017/';
 const DB_NAME = process.env.DB_NAME || 'IntegradorBDII';
 
@@ -23,18 +22,31 @@ mongoose.connect(`${MONGO_URL}${DB_NAME}`)
     .then(() => console.log("Conexión exitosa a la base de datos"))
     .catch((e) => console.log(`Error al conectarse: ${e}`));
 
-// --- Montar Rutas (API v1) ---
-// (Usamos /api/ como prefijo estándar, como sugiere el PDF)
+// --- 4. Montar todas las Rutas ---
+// (Usamos /api/ como prefijo, como pide el PDF)
 app.use("/api/users", userRoutes);
-// app.use("/api/products", productRoutes);
-// app.use("/api/categories", categoryRoutes);
-// app.use("/api/orders", orderRoutes);
-// app.use("/api/cart", cartRoutes);
-// app.use("/api/reviews", reviewRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/reviews", reviewRoutes);
 
-// (Aquí iría el middleware de manejo de errores)
+// --- 5. Middleware Global de Manejo de Errores ---
+// (Como pide el PDF )
+// Si cualquier 'next(error)' se llama en un controlador, "cae" acá.
+app.use((err, req, res, next) => {
+    // Muestro el error en la consola del servidor (para nosotros)
+    console.error(err.stack);
+    
+    // Le mando una respuesta genérica al cliente (para él)
+    res.status(500).json({
+        success: false,
+        message: 'Algo salió mal en el servidor.',
+        error: err.message // (Opcional: mandar el mensaje de error)
+    });
+});
 
-// Iniciar servidor
+// --- 6. Iniciar el servidor ---
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en puerto: ${PORT}`);
