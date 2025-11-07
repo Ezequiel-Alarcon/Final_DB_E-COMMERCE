@@ -53,15 +53,19 @@ export const createReview = async (req, res, next) => {
     const { producto_id, calificacion, comentario } = req.body;
 
     try {
-        // --- Chequeo 1: ¿El usuario compró este producto? --- 
-        // Busco un pedido del usuario que en sus 'items' tenga este 'producto_id'
-        const order = await Order.findOne({ 
-            user_id: userId, 
-            "items.producto_id": producto_id 
+        // --- Chequeo 1: ¿El usuario compró Y RECIBIÓ este producto? ---
+        // Busco un pedido del usuario que:
+        // 1. Tenga este 'producto_id' en sus 'items'.
+        // 2. Y que el 'estado' del pedido sea 'entregado'.
+        const order = await Order.findOne({
+            user_id: userId,
+            "items.producto_id": producto_id,
+            estado: "entregado"
         });
 
         if (!order) {
-            return res.status(403).json({ success: false, message: 'No puedes reseñar un producto que no has comprado' });
+            // Si no encuentra el pedido, es o porque no lo compró, o porque no se ha entregado
+            return res.status(403).json({ success: false, message: 'No puedes reseñar un producto que no has comprado o que aún no ha sido entregado' });
         }
 
         // --- Chequeo 2: ¿El usuario ya reseñó este producto? ---
@@ -78,7 +82,7 @@ export const createReview = async (req, res, next) => {
             comentario
         });
 
-        // --- (Denormalización)  ---
+        // --- (Denormalización) ---
         // Actualizo el 'calificacionPromedio' y 'numResenas' en el Producto
         await updateProductRating(producto_id);
 
