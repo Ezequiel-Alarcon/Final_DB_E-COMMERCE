@@ -1,5 +1,6 @@
 {
   "name": "final_db_e-commerce",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -20,6 +21,7 @@
   "homepage": "https://github.com/Ezequiel-Alarcon/Final_DB_E-COMMERCE#readme",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.2"

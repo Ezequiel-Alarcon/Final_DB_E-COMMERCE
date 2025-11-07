@@ -1,8 +1,6 @@
 import express from 'express';
-import { createCategory, getAllCategories, updateCategory, deleteCategory, getCategoryStats } from '../controllers/category.controller.js';
-
-// 2. Importo los "guardias" de seguridad
-import { requireAdmin, validateToken } from '../services/auth.service.js';
+import { createCategory, getAllCategories, updateCategory, deleteCategory, getCategoryStats } from '../controller/categoryController.js';
+import { requireAdmin, validateToken } from '../service/authService.js';
 
 // 3. Creo mi router
 const router = express.Router();

@@ -1,6 +1,6 @@
 import User from '../models/User.js';
 import Cart from '../models/Cart.js';
-import { generateToken } from '../services/auth.service.js';
+import { generateToken } from '../service/authService.js';
 
 // --- REGISTRAR UN NUEVO USUARIO ---
 // (Ruta: POST /api/users/register)

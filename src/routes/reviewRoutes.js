@@ -1,6 +1,6 @@
 import express from 'express';
-import { createReview, getReviewsForProduct, getAverageRatings, deleteReview } from '../controllers/review.controller.js';
-import { validateToken, requireAdmin } from '../services/auth.service.js';
+import { createReview, getReviewsForProduct, getAverageRatings, deleteReview } from '../controller/reviewController.js';
+import { validateToken, requireAdmin } from '../service/authService.js';
 
 const router = express.Router();
 

@@ -1,6 +1,5 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 
 import userRoutes from './routes/userRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
@@ -10,7 +9,6 @@ import orderRoutes from './routes/orderRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
 
 // --- 2. Configuración inicial ---
-dotenv.config();
 const app = express();
 app.use(express.json()); // Middleware para que Express entienda JSON
 

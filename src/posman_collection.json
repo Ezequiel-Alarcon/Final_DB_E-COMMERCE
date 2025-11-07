@@ -1,0 +1,1922 @@
+{
+	"info": {
+		"name": "Parcial BDD2 - Proyecto SRC (Poblado)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "--- 🚀 (Poblar BD) Carga Rápida ---",
+			"description": "Ejecuta estas carpetas EN ORDEN (de arriba hacia abajo) para poblar tu BD con datos de prueba.",
+			"item": [
+				{
+					"name": "Crear Usuarios (Clientes)",
+					"item": [
+						{
+							"name": "POST Crear Cliente Ana",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Cliente Ana\",\n    \"email\": \"ana@correo.com\",\n    \"password\": \"123456\",\n    \"phone\": \"111222333\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Crear Cliente Bruno",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Cliente Bruno\",\n    \"email\": \"bruno@correo.com\",\n    \"password\": \"123456\",\n    \"phone\": \"444555666\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Crear Cliente Carla",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Cliente Carla\",\n    \"email\": \"carla@correo.com\",\n    \"password\": \"123456\",\n    \"phone\": \"777888999\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Crear Categorías (Como Admin)",
+					"description": "Loguéate como Admin ANTES de ejecutar esto.",
+					"item": [
+						{
+							"name": "POST Crear Cat. Smartphones",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"if (jsonData.data && jsonData.data._id) {",
+											"    pm.collectionVariables.set(\"cat_smartphones_id\", jsonData.data._id);",
+											"    console.log(\"ID Smartphones guardado!\");",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Smartphones\",\n    \"descripcion\": \"Teléfonos inteligentes de alta gama\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/categories/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"categories",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Crear Cat. Laptops",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"if (jsonData.data && jsonData.data._id) {",
+											"    pm.collectionVariables.set(\"cat_laptops_id\", jsonData.data._id);",
+											"    console.log(\"ID Laptops guardado!\");",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Laptops\",\n    \"descripcion\": \"Computadoras portátiles para trabajo y estudio\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/categories/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"categories",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Crear Cat. Audio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"if (jsonData.data && jsonData.data._id) {",
+											"    pm.collectionVariables.set(\"cat_audio_id\", jsonData.data._id);",
+											"    console.log(\"ID Audio guardado!\");",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Audio\",\n    \"descripcion\": \"Auriculares y parlantes\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/categories/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"categories",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Crear Cat. Gaming",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"if (jsonData.data && jsonData.data._id) {",
+											"    pm.collectionVariables.set(\"cat_gaming_id\", jsonData.data._id);",
+											"    console.log(\"ID Gaming guardado!\");",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Gaming\",\n    \"descripcion\": \"Consolas, periféricos y videojuegos\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/categories/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"categories",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Crear Productos (Como Admin)",
+					"description": "Loguéate como Admin ANTES de ejecutar esto. Requiere que hayas ejecutado \"Crear Categorías\" primero.",
+					"item": [
+						{
+							"name": "POST Prod. iPhone 15",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"if (jsonData.data && jsonData.data._id) {",
+											"    pm.collectionVariables.set(\"prod_iphone_id\", jsonData.data._id);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"iPhone 15 Pro\",\n    \"descripcion\": \"Titanio. Muy Pro.\",\n    \"categoria_id\": \"{{cat_smartphones_id}}\",\n    \"precio\": 1199,\n    \"stock\": 50,\n    \"marca\": \"Apple\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/products/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Prod. Samsung S24",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"if (jsonData.data && jsonData.data._id) {",
+											"    pm.collectionVariables.set(\"prod_samsung_id\", jsonData.data._id);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Samsung Galaxy S24 Ultra\",\n    \"descripcion\": \"Con Galaxy AI.\",\n    \"categoria_id\": \"{{cat_smartphones_id}}\",\n    \"precio\": 1299,\n    \"stock\": 40,\n    \"marca\": \"Samsung\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/products/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Prod. MacBook Air",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"if (jsonData.data && jsonData.data._id) {",
+											"    pm.collectionVariables.set(\"prod_macbook_id\", jsonData.data._id);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"MacBook Air M3 13\\\"\",\n    \"descripcion\": \"Liviana y poderosa.\",\n    \"categoria_id\": \"{{cat_laptops_id}}\",\n    \"precio\": 1499,\n    \"stock\": 20,\n    \"marca\": \"Apple\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/products/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Prod. Sony WH-1000XM5",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"if (jsonData.data && jsonData.data._id) {",
+											"    pm.collectionVariables.set(\"prod_sony_id\", jsonData.data._id);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Sony WH-1000XM5\",\n    \"descripcion\": \"Auriculares con cancelación de ruido.\",\n    \"categoria_id\": \"{{cat_audio_id}}\",\n    \"precio\": 399,\n    \"stock\": 70,\n    \"marca\": \"Sony\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/products/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Prod. PlayStation 5",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"if (jsonData.data && jsonData.data._id) {",
+											"    pm.collectionVariables.set(\"prod_ps5_id\", jsonData.data._id);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"PlayStation 5 Slim\",\n    \"descripcion\": \"La nueva generación de consolas.\",\n    \"categoria_id\": \"{{cat_gaming_id}}\",\n    \"precio\": 499,\n    \"stock\": 35,\n    \"marca\": \"Sony\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/products/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Poblar Carrito (Cliente Ana)",
+					"description": "Ejecuta estas peticiones para llenar el carrito de 'ana@correo.com'",
+					"item": [
+						{
+							"name": "POST Login (Cliente Ana)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// (Script para auto-guardar el token y el ID de usuario)",
+											"var jsonData = JSON.parse(responseBody);",
+											"if (jsonData.data && jsonData.data.token) {",
+											"    pm.collectionVariables.set(\"token\", jsonData.data.token);",
+											"    pm.collectionVariables.set(\"userId\", jsonData.data._id);",
+											"    console.log(\"Token de Cliente Ana guardado!\");",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"ana@correo.com\",\n    \"password\": \"123456\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Agregar iPhone (Ana)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"producto_id\": \"{{prod_iphone_id}}\",\n    \"cantidad\": 1\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/cart/items",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Agregar Auris Sony (Ana)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"producto_id\": \"{{prod_sony_id}}\",\n    \"cantidad\": 2\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/cart/items",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Agregar PS5 (Ana)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"producto_id\": \"{{prod_ps5_id}}\",\n    \"cantidad\": 1\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/cart/items",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"items"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "---------------------------------",
+			"item": []
+		},
+		{
+			"name": "Usuarios (Auth)",
+			"description": "Rutas de registro, login y gestión de usuarios.",
+			"item": [
+				{
+					"name": "POST Registrar Usuario (Público)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Usuario de Prueba\",\n    \"email\": \"prueba@correo.com\",\n    \"password\": \"123456\",\n    \"phone\": \"123456789\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						},
+						"description": "Ruta pública para registrar un nuevo usuario. Esto también crea su carrito vacío."
+					},
+					"response": []
+				},
+				{
+					"name": "POST Login Usuario (Público)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// (Script para auto-guardar el token y el ID de usuario)",
+									"var jsonData = JSON.parse(responseBody);",
+									"if (jsonData.data && jsonData.data.token) {",
+									"    pm.collectionVariables.set(\"token\", jsonData.data.token);",
+									"    pm.collectionVariables.set(\"userId\", jsonData.data._id);",
+									"    console.log(\"Token guardado!\");",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"prueba@correo.com\",\n    \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": "Ruta pública para loguearse. Si funciona, el script en 'Tests' guarda el token en la variable {{token}}."
+					},
+					"response": []
+				},
+				{
+					"name": "GET Ver Mi Perfil (Auth)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userId}}"
+							]
+						},
+						"description": "Ruta protegida. Un usuario 'client' solo puede ver su propio perfil."
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Actualizar Mi Perfil (Auth)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Nuevo Nombre\",\n    \"phone\": \"987654321\",\n    \"addresses\": [\n        {\n            \"street\": \"Calle Falsa 123\",\n            \"city\": \"Springfield\",\n            \"country\": \"USA\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userId}}"
+							]
+						},
+						"description": "Ruta protegida. Un usuario 'client' solo puede modificar su propio perfil."
+					},
+					"response": []
+				},
+				{
+					"name": "GET Listar Todos (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						},
+						"description": "Ruta solo para Admins."
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Usuario (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId_a_borrar}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userId_a_borrar}}"
+							]
+						},
+						"description": "Ruta solo para Admins. Esto elimina al usuario Y su carrito asociado."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categorías",
+			"description": "Rutas para gestionar las categorías.",
+			"item": [
+				{
+					"name": "GET Todas las Categorías (Público)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/categories/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								""
+							]
+						},
+						"description": "Ruta pública."
+					},
+					"response": []
+				},
+				{
+					"name": "POST Crear Categoría (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Laptops\",\n    \"descripcion\": \"Computadoras portátiles\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/categories/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								""
+							]
+						},
+						"description": "Ruta solo para Admins."
+					},
+					"response": []
+				},
+				{
+					"name": "GET Stats de Categorías (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/categories/stats",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"stats"
+							]
+						},
+						"description": "Ruta de agregación solo para Admins. Usa $lookup y $size."
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Actualizar Categoría (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Laptops (Actualizado)\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/categories/{{categoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"{{categoryId}}"
+							]
+						},
+						"description": "Ruta solo para Admins."
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Categoría (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/categories/{{categoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"{{categoryId}}"
+							]
+						},
+						"description": "Ruta solo para Admins. No te dejará borrar si tiene productos asociados."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Productos",
+			"description": "Rutas públicas y de admin para gestionar productos.",
+			"item": [
+				{
+					"name": "GET Todos los Productos (Público)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"products",
+								""
+							]
+						},
+						"description": "Ruta pública. Lista productos y popula el nombre de la categoría."
+					},
+					"response": []
+				},
+				{
+					"name": "GET Producto por ID (Público)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/{{productId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"{{productId}}"
+							]
+						},
+						"description": "Ruta pública."
+					},
+					"response": []
+				},
+				{
+					"name": "GET Filtrar Productos (Público)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/filtro?min=100&max=1000&marca=iPhone",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"filtro"
+							],
+							"query": [
+								{
+									"key": "min",
+									"value": "100"
+								},
+								{
+									"key": "max",
+									"value": "1000"
+								},
+								{
+									"key": "marca",
+									"value": "iPhone"
+								}
+							]
+						},
+						"description": "Ruta pública de filtros. Usa $gte y $lte."
+					},
+					"response": []
+				},
+				{
+					"name": "GET Top Productos Reseñados (Público)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/top",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"top"
+							]
+						},
+						"description": "Ruta pública de agregación. Usa $group, $sort, $limit, $lookup, $unwind."
+					},
+					"response": []
+				},
+				{
+					"name": "POST Crear Producto (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"iPhone 15\",\n    \"descripcion\": \"Teléfono de Apple\",\n    \"categoria_id\": \"{{categoryId}}\",\n    \"precio\": 999,\n    \"stock\": 50\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/products/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"products",
+								""
+							]
+						},
+						"description": "Ruta solo para Admins."
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Actualizar Producto (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"iPhone 15 Pro\",\n    \"precio\": 1199\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/products/{{productId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"{{productId}}"
+							]
+						},
+						"description": "Ruta solo para Admins."
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH Actualizar Stock (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"stock\": 45\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/products/{{productId}}/stock",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"{{productId}}",
+								"stock"
+							]
+						},
+						"description": "Ruta solo para Admins. Usa $set."
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Producto (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/{{productId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"{{productId}}"
+							]
+						},
+						"description": "Ruta solo para Admins."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Carrito",
+			"description": "Rutas para gestionar el carrito. Requieren autenticación.",
+			"item": [
+				{
+					"name": "GET Mi Carrito (Auth)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/cart/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"cart",
+								""
+							]
+						},
+						"description": "Ruta protegida. Trae el carrito del usuario logueado."
+					},
+					"response": []
+				},
+				{
+					"name": "POST Agregar/Actualizar Item (Auth)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"producto_id\": \"{{productId}}\",\n    \"cantidad\": 2\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/cart/items",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"cart",
+								"items"
+							]
+						},
+						"description": "Ruta protegida. Si el item ya existe, actualiza la cantidad. Si no, lo agrega."
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Quitar Item (Auth)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/cart/items/{{productId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"cart",
+								"items",
+								"{{productId}}"
+							]
+						},
+						"description": "Ruta protegida. Usa $pull para quitar el item."
+					},
+					"response": []
+				},
+				{
+					"name": "GET Total del Carrito (Auth)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/cart/total",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"cart",
+								"total"
+							]
+						},
+						"description": "Ruta protegida. Calcula el total y subtotales."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedidos",
+			"description": "Rutas para crear y gestionar pedidos.",
+			"item": [
+				{
+					"name": "POST Crear Pedido (Auth)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"metodo_pago\": \"Tarjeta de Crédito\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								""
+							]
+						},
+						"description": "Ruta protegida. Convierte el carrito en pedido, descuenta stock y vacía el carrito."
+					},
+					"response": []
+				},
+				{
+					"name": "GET Mis Pedidos (Auth)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/myorders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								"myorders"
+							]
+						},
+						"description": "Ruta protegida. Muestra solo los pedidos del usuario logueado."
+					},
+					"response": []
+				},
+				{
+					"name": "GET Todos los Pedidos (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								""
+							]
+						},
+						"description": "Ruta solo para Admins. Lista todos los pedidos y popula los datos de usuario."
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH Actualizar Estado Pedido (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"estado\": \"entregado\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/{{orderId}}/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								"{{orderId}}",
+								"status"
+							]
+						},
+						"description": "Ruta solo para Admins. Usa $set para actualizar el estado."
+					},
+					"response": []
+				},
+				{
+					"name": "GET Stats de Pedidos (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/stats",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								"stats"
+							]
+						},
+						"description": "Ruta de agregación solo para Admins. Usa $group y $sum."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reseñas",
+			"description": "Rutas para gestionar las reseñas (reviews).",
+			"item": [
+				{
+					"name": "POST Crear Reseña (Auth)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"producto_id\": \"{{productId}}\",\n    \"calificacion\": 5,\n    \"comentario\": \"¡Excelente producto!\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/reviews/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								""
+							]
+						},
+						"description": "Ruta protegida. Verifica que el usuario haya comprado y recibido ('entregado') el producto. Luego, recalcula el promedio en el modelo Producto."
+					},
+					"response": []
+				},
+				{
+					"name": "GET Reseñas por Producto (Público)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/reviews/product/{{productId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								"product",
+								"{{productId}}"
+							]
+						},
+						"description": "Ruta pública."
+					},
+					"response": []
+				},
+				{
+					"name": "GET Promedio Calificaciones (Público)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/reviews/top",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								"top"
+							]
+						},
+						"description": "Ruta pública de agregación. Usa $group, $avg, $lookup, $unwind."
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Mi Reseña (Auth)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/reviews/{{reviewId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								"{{reviewId}}"
+							]
+						},
+						"description": "Ruta protegida. Solo el dueño de la reseña o un admin pueden borrarla. También recalcula el promedio en Producto."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "categoryId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "productId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "orderId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "reviewId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userId_a_borrar",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "cat_smartphones_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "cat_laptops_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "cat_audio_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "cat_gaming_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "prod_iphone_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "prod_samsung_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "prod_macbook_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "prod_sony_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "prod_ps5_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

@@ -1,6 +1,6 @@
 import express from 'express';
-import { createProduct, getAllProducts, getProductById, updateProduct, deleteProduct, updateStock, filterProducts, getTopReviewedProducts } from '../controllers/product.controller.js';
-import { validateToken, requireAdmin } from '../services/auth.service.js';
+import { createProduct, getAllProducts, getProductById, updateProduct, deleteProduct, updateStock, filterProducts, getTopReviewedProducts } from '../controller/productController.js';
+import { validateToken, requireAdmin } from '../service/authService.js';
 
 const router = express.Router();
 
