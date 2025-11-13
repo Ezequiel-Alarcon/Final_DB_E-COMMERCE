@@ -1,19 +1,13 @@
 import mongoose from "mongoose";
 import bcrypt from 'bcryptjs';
 
-
-// Justificación: Se utiliza un subdocumento (embebido) porque
-// la dirección es un dato que "pertenece" al usuario.
-// No tiene sentido que una dirección exista por sí sola.
-// Al embeberlas, cuando consultamos un Usuario, también
-// obtenemos sus direcciones en la misma consulta.
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, trim: true, unique: true, lowercase: true },
     password: { type: String, required: true, minlength: 6, select: false },
     role: { type: String, enum: ['client', 'admin'], default: 'client' },
     phone: { type: String, trim: true },
-    addresses: [{ street: String, city: String, country: String }] // embebido
+    addresses: [{ street: String, city: String, country: String }]
 }, { timestamps: true });
 
 // Hook para hashear password antes de guardar

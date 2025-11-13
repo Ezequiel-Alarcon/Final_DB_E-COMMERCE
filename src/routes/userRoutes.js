@@ -4,13 +4,13 @@ import { validateToken, requireAdmin } from '../service/authService.js';
 
 const router = express.Router();
 
-// --- Rutas Públicas (Cualquiera puede acceder) ---
-router.post('/register', registerUser); // Registrarse
-router.post('/login', loginUser);       // Iniciar sesión
+// --- Rutas Públicas ---
+router.post('/register', registerUser); 
+router.post('/login', loginUser);       
 
-// --- Rutas de Admin (Solo rol 'admin') ---
-router.get('/', validateToken, requireAdmin, getAllUsers);     // Listar TODOS
-router.delete('/:id', validateToken, requireAdmin, deleteUser); // Borrar CUALQUIERA
+// --- Rutas de Admin ---
+router.get('/', validateToken, requireAdmin, getAllUsers);   
+router.delete('/:id', validateToken, requireAdmin, deleteUser); 
 
 // --- Rutas de Usuario Logueado (Cualquier rol, PERO validado) ---
 // El PDF pide GET /api/users/:id

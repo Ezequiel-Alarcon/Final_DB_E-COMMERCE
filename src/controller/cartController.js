@@ -1,24 +1,19 @@
 import Cart from '../models/Cart.js';
-import Product from '../models/Product.js'; // Para chequear stock y precios
+import Product from '../models/Product.js';
 
 // --- OBTENER EL CARRITO DEL USUARIO ---
-// (Ruta: GET /api/cart/)
 export const getMyCart = async (req, res, next) => {
     try {
-        // 1. Saco el ID del usuario (que viene del token)
         const userId = req.user.id;
 
-        // 2. Busco el carrito de ese usuario
-        // Uso .populate() para "rellenar" los datos de los productos
         const cart = await Cart.findOne({ user_id: userId }).populate('items.producto_id', 'nombre precio stock');
 
-        // 3. (Caso borde) Si por alguna razón no tiene carrito (ej: usuario viejo), le creo uno
+        // Si por alguna razón no tiene carrito (ej: usuario viejo), le creo uno
         if (!cart) {
             const newCart = await Cart.create({ user_id: userId, items: [] });
             return res.status(200).json({ success: true, data: newCart });
         }
 
-        // 4. Mando el carrito encontrado
         res.status(200).json({ success: true, data: cart });
 
     } catch (error) {
@@ -27,10 +22,9 @@ export const getMyCart = async (req, res, next) => {
 };
 
 // --- AGREGAR UN ITEM AL CARRITO ---
-// (Ruta: POST /api/cart/items)
 export const addItemToCart = async (req, res, next) => {
-    const userId = req.user.id; // Saco el ID del usuario del token
-    const { producto_id, cantidad } = req.body;    // Saco el ID del producto y la cantidad del body
+    const userId = req.user.id; 
+    const { producto_id, cantidad } = req.body;    
 
     try {
         // 1. Busco el producto para saber su precio y stock
@@ -56,18 +50,15 @@ export const addItemToCart = async (req, res, next) => {
         const itemExistente = cart.items.find(item => item.producto_id.toString() === producto_id);
 
         if (itemExistente) {
-            // Si ya está, solo actualizo la cantidad
             itemExistente.cantidad = cantidad;
         } else {
-            // Si es nuevo, lo agrego al array (usando $push como pide el PDF)
             cart.items.push({
                 producto_id: producto_id,
                 cantidad: cantidad,
-                agregarPrecio: product.precio // Guardamos el precio del producto
+                agregarPrecio: product.precio 
             });
         }
 
-        // 5. Guardo los cambios en el carrito
         const updatedCart = await cart.save();
         res.status(200).json({ success: true, data: updatedCart });
 
@@ -77,25 +68,21 @@ export const addItemToCart = async (req, res, next) => {
 };
 
 // --- QUITAR UN ITEM DEL CARRITO ---
-// (Ruta: DELETE /api/cart/items/:productId)
 export const removeItemFromCart = async (req, res, next) => {
-    const userId = req.user.id; // Saco el ID del usuario del token
-    const { productId } = req.params;    // Saco el ID del producto de la URL
+    const userId = req.user.id; 
+    const { productId } = req.params;   
 
 
     try {
-        // 1. Busco el carrito
         const cart = await Cart.findOne({ user_id: userId });
         if (!cart) {
             return res.status(404).json({ success: false, message: 'Carrito no encontrado' });
         }
 
-        // 2. Uso $pull (como pide el PDF) para sacar el item del array
-        // $pull saca CUALQUIER objeto del array 'items' que coincida con el filtro
         const updatedCart = await Cart.findByIdAndUpdate(
             cart._id,
             { $pull: { items: { producto_id: productId } } },
-            { new: true } // Para que me devuelva el carrito actualizado
+            { new: true }
         );
 
         res.status(200).json({ success: true, data: updatedCart });
@@ -108,17 +95,14 @@ export const removeItemFromCart = async (req, res, next) => {
 // --- CALCULAR TOTAL Y SUBTOTALES DEL CARRITO ---
 // (Ruta: GET /api/cart/total)
 export const getCartTotal = async (req, res, next) => {
-    // Saco el ID del usuario del token
     const userId = req.user.id; 
 
     try {
-        // 1. Busco el carrito
         const cart = await Cart.findOne({ user_id: userId });
         if (!cart) {
             return res.status(404).json({ success: false, message: 'Carrito no encontrado' });
         }
 
-        // 2. Chequeo si hay items
         if (cart.items.length === 0) {
             return res.status(200).json({ 
                 success: true, 
@@ -129,15 +113,11 @@ export const getCartTotal = async (req, res, next) => {
             });
         }
 
-        // 3. Calculo el total
         let totalGeneral = 0;
 
-        // Uso .map() para calcular el subtotal de CADA item
         const itemsConSubtotal = cart.items.map(item => {
-            // Uso el precio que guardamos cuando se agregó al carrito
             const subtotal = item.agregarPrecio * item.cantidad; 
             
-            // Voy sumando al total general
             totalGeneral += subtotal;
 
             return {
@@ -148,7 +128,6 @@ export const getCartTotal = async (req, res, next) => {
             };
         });
 
-        // 4. Respondo con los subtotales y el total
         res.status(200).json({
             success: true,
             data: {

@@ -5,7 +5,6 @@ import { validateToken, requireAdmin } from '../service/authService.js';
 const router = express.Router();
 
 // --- Todas las rutas de pedidos requieren estar logueado ---
-// (Como pide el PDF)
 router.use(validateToken);
 
 // --- Rutas de Cliente ---
@@ -14,7 +13,6 @@ router.use(validateToken);
 router.post('/', createOrder);
 
 // GET /api/orders/myorders  -> Ver mis pedidos
-// (Esta es nuestra versión de 'pedidos de un usuario')
 router.get('/myorders', getMyOrders);
 
 

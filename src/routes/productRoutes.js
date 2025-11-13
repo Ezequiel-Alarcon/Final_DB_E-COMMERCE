@@ -5,7 +5,7 @@ import { validateToken, requireAdmin } from '../service/authService.js';
 const router = express.Router();
 
 
-// --- Rutas Públicas (Cualquiera puede ver) ---
+// --- Rutas Públicas ---
 
 // GET /api/products/  -> Trae todos los productos
 router.get('/', getAllProducts);
@@ -29,7 +29,6 @@ router.post('/', validateToken, requireAdmin, createProduct);
 router.put('/:id', validateToken, requireAdmin, updateProduct);
 
 // PATCH /api/products/:id/stock  -> Actualizar SOLO el stock
-// (Uso PATCH porque es una actualización parcial)
 router.patch('/:id/stock', validateToken, requireAdmin, updateStock);
 
 // DELETE /api/products/:id  -> Borrar un producto

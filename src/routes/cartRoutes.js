@@ -4,14 +4,14 @@ import { validateToken } from '../service/authService.js';
 
 const router = express.Router();
 
-// --- Rutas Protegidas (Todas requieren estar logueado) ---
+// --- Rutas Protegidas ---
 // Pongo el guardia 'validateToken' una sola vez acá arriba
 router.use(validateToken);
 
 // GET /api/cart/  -> Trae mi carrito
 router.get('/', getMyCart);
 
-// GET /api/cart/total  -> Calcula el total (como pide el PDF)
+// GET /api/cart/total  -> Calcula el total
 router.get('/total', getCartTotal);
 
 // POST /api/cart/items  -> Agrega/actualiza un item

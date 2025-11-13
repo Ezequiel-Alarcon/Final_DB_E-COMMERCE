@@ -1,19 +1,17 @@
 import Order from '../models/Order.js';
 import Cart from '../models/Cart.js';
-import Product from '../models/Product.js'; // Para chequear stock y precios actuales
+import Product from '../models/Product.js'; 
 
 // --- CREAR UN PEDIDO (RUTA DE CLIENTE) ---
-// (Ruta: POST /api/orders)
 export const createOrder = async (req, res, next) => {
-    const userId = req.user.id; // Saco el ID del usuario del token
-    const { metodo_pago } = req.body; // Saco el método de pago del body (ej: { "metodo_pago": "tarjeta" })
+    const userId = req.user.id;
+    const { metodo_pago } = req.body;
 
     if (!metodo_pago) {
         return res.status(400).json({ success: false, message: 'Falta el método de pago' });
     }
 
     try {
-        // 1. Busco el carrito del usuario
         const cart = await Cart.findOne({ user_id: userId });
 
         if (!cart || cart.items.length === 0) {
@@ -21,19 +19,15 @@ export const createOrder = async (req, res, next) => {
         }
 
         let totalPedido = 0;
-        const itemsDelPedido = []; // El array de items para el modelo Order
+        const itemsDelPedido = []; 
 
-        // 2. Verifico stock y armo los items del pedido
-        // (Uso un 'for...of' loop para poder usar 'await' adentro)
         for (const item of cart.items) {
             const productoDB = await Product.findById(item.producto_id);
 
-            // Chequeo si el producto sigue existiendo
             if (!productoDB) {
                 return res.status(404).json({ success: false, message: `El producto con ID ${item.producto_id} ya no existe` });
             }
 
-            // Chequeo stock
             if (productoDB.stock < item.cantidad) {
                 return res.status(400).json({ success: false, message: `No hay stock suficiente para ${productoDB.nombre}` });
             }
@@ -52,12 +46,11 @@ export const createOrder = async (req, res, next) => {
                 subtotal: subtotal
             });
 
-            // 3. (Lógica de negocio) Descontamos el stock
+            // (Lógica de negocio) Descontamos el stock
             productoDB.stock -= item.cantidad;
             await productoDB.save();
         }
 
-        // 4. Creamos el pedido
         const newOrder = await Order.create({
             user_id: userId,
             items: itemsDelPedido,
@@ -66,11 +59,10 @@ export const createOrder = async (req, res, next) => {
             estado: 'pendiente' // El estado default
         });
 
-        // 5. ¡Vaciamos el carrito!
+        // ¡Vaciamos el carrito!
         cart.items = [];
         await cart.save();
 
-        // 6. Respondemos con éxito
         res.status(201).json({ success: true, data: newOrder });
 
     } catch (error) {

@@ -10,7 +10,7 @@ import reviewRoutes from './routes/reviewRoutes.js';
 
 // --- 2. Configuración inicial ---
 const app = express();
-app.use(express.json()); // Middleware para que Express entienda JSON
+app.use(express.json());
 
 // --- 3. Conexión a Base de Datos ---
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost:27017/';
@@ -21,7 +21,6 @@ mongoose.connect(`${MONGO_URL}${DB_NAME}`)
     .catch((e) => console.log(`Error al conectarse: ${e}`));
 
 // --- 4. Montar todas las Rutas ---
-// (Usamos /api/ como prefijo, como pide el PDF)
 app.use("/api/users", userRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/products", productRoutes);
@@ -30,7 +29,6 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/reviews", reviewRoutes);
 
 // --- 5. Middleware Global de Manejo de Errores ---
-// (Como pide el PDF )
 // Si cualquier 'next(error)' se llama en un controlador, "cae" acá.
 app.use((err, req, res, next) => {
     // Muestro el error en la consola del servidor (para nosotros)
@@ -40,7 +38,7 @@ app.use((err, req, res, next) => {
     res.status(500).json({
         success: false,
         message: 'Algo salió mal en el servidor.',
-        error: err.message // (Opcional: mandar el mensaje de error)
+        error: err.message
     });
 });
 

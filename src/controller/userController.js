@@ -1,4 +1,4 @@
-import User from '../models/User.js';
+import User from '../models/user.js';
 import Cart from '../models/Cart.js';
 import { generateToken } from '../service/authService.js';
 
@@ -6,7 +6,7 @@ import { generateToken } from '../service/authService.js';
 // (Ruta: POST /api/users/register)
 export const registerUser = async (req, res, next) => {
     // 1. Obtenemos los datos del body
-    const { name, email, password, phone } = req.body;
+    const { name, email, password, phone, addresses } = req.body;
 
     try {
         // 2. Verificamos si el email ya existe
@@ -20,7 +20,8 @@ export const registerUser = async (req, res, next) => {
             name,
             email,
             password,
-            phone
+            phone,
+            addresses
         });
         
         // 4. Guardamos el usuario en la BD

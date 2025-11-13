@@ -2,12 +2,9 @@ import express from 'express';
 import { createCategory, getAllCategories, updateCategory, deleteCategory, getCategoryStats } from '../controller/categoryController.js';
 import { requireAdmin, validateToken } from '../service/authService.js';
 
-// 3. Creo mi router
 const router = express.Router();
 
-// --- Rutas Públicas (Cualquiera las puede ver) ---
-
-// GET /api/categories/  -> Trae todas las categorías
+// --- Rutas Públicas ---
 router.get('/', getAllCategories);
 
 
@@ -16,7 +13,7 @@ router.get('/', getAllCategories);
 // POST /api/categories/  -> Crear una categoría nueva
 router.post('/', validateToken, requireAdmin, createCategory);
 
-// GET /api/categories/stats  -> La ruta de estadísticas que pide el PDF
+// GET /api/categories/stats  -> La ruta de estadísticas
 // La pongo en admin porque es información "interna"
 router.get('/stats', validateToken, requireAdmin, getCategoryStats);
 

@@ -4,7 +4,7 @@ import { validateToken, requireAdmin } from '../service/authService.js';
 
 const router = express.Router();
 
-// --- Rutas Públicas (Cualquiera puede verlas ) ---
+// --- Rutas Públicas ---
 
 // GET /api/reviews/top  -> Promedio de calificaciones por producto 
 router.get('/top', getAverageRatings);
